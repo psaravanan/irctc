@@ -1,2 +1,8 @@
-%h1 Home#index
-%p Find me in app/views/home/index.html.haml
+%form
+  .form-group
+    %label{:for => "exampleInputEmail1"} Email address
+    %input#exampleInputEmail1.form-control{:placeholder => "PNR Number", name: :pnr_number, :type => "text", value: params[:pnr_number]}
+  %button.btn.btn-default{:type => "submit"} Submit
+
+- if @rail_in
+  = @pnr_status
