@@ -1,0 +1,13 @@
+%h2 Stations
+- p @stations
+%table.table.table-striped
+  %thead
+    %th #
+    %th Code
+    %th Name
+  %tbody
+    - @stations.each_with_index do |station, index|
+      %tr
+        %td= index + 1
+        %td= station["code"]
+        %td= station["name"]

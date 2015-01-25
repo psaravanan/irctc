@@ -1,0 +1,38 @@
+%h2 Trains
+%form
+  .form-group
+    /%input#exampleInputEmail1.form-control{:placeholder => "From station", name: "search[from]", :type => "text", value: @station_from}
+    /%input#exampleInputEmail1.form-control{:placeholder => "To station", name: "search[to]", :type => "text", value: @station_to}
+    %select 
+      - @stations.each do |station|
+        %option{value: station["code"], name: "search[from]"}= station["name"]
+    %select 
+      - @stations.each do |station|
+        %option{value: station["code"], name: "search[to]"}= station["name"]
+  %button.btn.btn-primary{:type => "submit"} Submit
+= @trains
+- if @trains
+  %table.table.table-striped
+    %thead
+      %th #
+      %th Train Number
+      %th Train Name
+      %th From
+      %th Start Time
+      %th To
+      %th Arrival Time
+      %th Travel Time
+    %tbody
+      - if @trains["status"]=="OK"
+        - @trains["result"].each_with_index do |train, index|
+          %tr
+            %td= index + 1
+            %td= train["trainno"]
+            %td= train["name"]
+            %td= train["fromname"]
+            %td= train["dep"]
+            %td= train["toname"]
+            %td= train["arr"]
+            %td= train["traveltime"]
+      - else
+        %td{colspan: 5} Something went wrong
