@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   resources :users
 
-  get 'home/index'
-  get 'home/station_lists'
-  get 'home/trains'
+  get 'index' => "home#index"
+  get 'pnr_status' => "home#pnr_status"
+  get 'station_lists' => "home#station_lists"
+  get 'trains' => "home#trains"
+  get 'routes' => "home#routes"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

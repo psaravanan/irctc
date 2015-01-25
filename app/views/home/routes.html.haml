@@ -1,0 +1,22 @@
+%h2 Routes
+%form
+  .form-group
+    %input#exampleInputEmail1.form-control{:placeholder => "Train number", name: :train_no, :type => "text", value: params[:train_no]}
+  %button.btn.btn-primary{:type => "submit"} Submit
+
+- if @routes and @routes["status"]=="OK"
+  %h3= @routes["result"]["name"]
+  %table.table
+    %thead
+      %th Train name
+      %th Arrival time
+      %th Departure time
+      %th Day
+    %tbody
+      - @routes["result"]["route"].each_with_index do |route, index|
+        - route["stn"].each_with_index do |stn, index|
+          %tr
+            %td= stn["name"]
+            %td= stn["arr"]
+            %td= stn["dep"]
+            %td= stn["day"]

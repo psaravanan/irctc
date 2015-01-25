@@ -3,12 +3,12 @@
   .form-group
     /%input#exampleInputEmail1.form-control{:placeholder => "From station", name: "search[from]", :type => "text", value: @station_from}
     /%input#exampleInputEmail1.form-control{:placeholder => "To station", name: "search[to]", :type => "text", value: @station_to}
-    %select 
+    %select{name: "search[from]"}
       - @stations.each do |station|
-        %option{value: station["code"], name: "search[from]"}= station["name"]
-    %select 
+        %option{value: station["code"], selected: station["code"]==@station_from}= station["name"]
+    %select{name: "search[to]"}
       - @stations.each do |station|
-        %option{value: station["code"], name: "search[to]"}= station["name"]
+        %option{value: station["code"], selected: station["code"]==@station_to}= station["name"]
   %button.btn.btn-primary{:type => "submit"} Submit
 = @trains
 - if @trains
