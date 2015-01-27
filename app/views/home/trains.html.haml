@@ -10,7 +10,7 @@
       - @stations.each do |station|
         %option{value: station["code"], selected: station["code"]==@station_to}= station["name"]
   %button.btn.btn-primary{:type => "submit"} Submit
-= @trains
+=@trains
 - if @trains
   %table.table.table-striped
     %thead
@@ -26,13 +26,13 @@
     %tbody
       - if @trains["status"]=="OK"
         - @trains["result"].each_with_index do |train, index|
-          = form_for "", ticket_fare_path do |f|
+          = form_for "train" do |f|
             - train_no = train["trainno"]
             %tr
               %td= index + 1
               %td
-                %input{type: :hidden, name: "#{train_no}[from]", value: train["from"]}
-                %input{type: :hidden, name: "#{train_no}[to]", value: train["to"]}
+                %input{type: :hidden, name: "train[#{train_no}][from]", value: train["from"]}
+                %input{type: :hidden, name: "train[#{train_no}][to]", value: train["to"]}
                 = train["trainno"]
               %td= train["name"]
               %td= train["fromname"]
@@ -40,9 +40,10 @@
               %td= train["toname"]
               %td= train["arr"]
               %td= train["traveltime"]
-              %td
-                - ticket_classes = train["class"].split(",")
-                -ticket_classes.each do |c| 
-                  %button.btn.btn-default{type: :submit} c
+              - if train["cls"]
+                %td
+                  - ticket_classes = train["cls"].split(" ")
+                  -ticket_classes.each do |c| 
+                    %button.btn.btn-default{name: :commit, type: :submit, value: c }= c
       - else
         %td{colspan: 5} Something went wrong

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :users
-
+  post 'trains' => "home#trains"
   get 'index' => "home#index"
   get 'pnr_status' => "home#pnr_status"
   get 'station_lists' => "home#station_lists"
