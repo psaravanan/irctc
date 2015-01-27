@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'station_lists' => "home#station_lists"
   get 'trains' => "home#trains"
   get 'routes' => "home#routes"
+  get 'ticket_fare' => "home#ticket_fare"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

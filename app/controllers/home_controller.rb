@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   
-  def index
+  def pnr_status
     if params[:pnr_number]
       @rail_in = RailIn.new(ERAILKEY)
       # 4404478884
@@ -32,6 +32,10 @@ class HomeController < ApplicationController
       @rail_in = RailIn.new(ERAILKEY)
       @routes = @rail_in.route(params[:train_no])
     end
+  end
+
+  def ticket_fare
+    
   end
 
 end
