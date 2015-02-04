@@ -28,7 +28,7 @@ gem 'spring',        group: :development
 
 gem 'rails-rail-in', '~> 1.0.0'
 gem "haml-rails"
-gem "twitter-bootstrap-rails"
+# gem "twitter-bootstrap-rails"
 gem 'tzinfo-data'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

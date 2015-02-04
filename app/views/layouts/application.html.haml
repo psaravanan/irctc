@@ -4,7 +4,7 @@
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    %title= content_for?(:title) ? yield(:title) : "Irctc"
+    %title= content_for?(:title) ? yield(:title) : "IRCTC"
     = csrf_meta_tags
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
@@ -16,30 +16,37 @@
     /= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
     /= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
     = javascript_include_tag "application"
-
-
   %body
-    .navbar.navbar-default.navbar-static-top
-      .container
-        %button.navbar-toggle(type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse")
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %a.navbar-brand(href=root_path) Irctc
-
-    .container
-      .row
-        .col-lg-9
-          = bootstrap_flash
-          = yield
-        .col-lg-3
-          .well.sidebar-nav
-            /%h3 Sidebar
-            %ul.nav.nav-list
-              / %li.nav-header Sidebar
-              %li= link_to "PNR Status", pnr_status_path
-              %li= link_to "Stations List", station_lists_path
-              %li= link_to "Trains List", trains_path
-              %li= link_to "Routes", routes_path
-      %footer
-        %p &copy; IRCTC 2015
+    / Dynamic Background
+    #headerimgs
+      #headerimg1.headerimg
+      #headerimg2.headerimg
+    / ENDS Dynamic Background
+    / background nav
+    #headernav
+      #back.btn
+      #next.btn
+    / ENDS background nav
+    #top-gap
+    / wrapper
+    .wrapper
+      %a{:href => "index.html"}
+        %img#logo{:alt => "Kroft", :src => "/assets/logo.png"}/
+      =render "nav_bar"
+      / content wrap
+      #content-wrap
+        / Page wrap
+        #page-wrap
+          = render "front_slider"
+          - if controller_name=="home" and action_name=="index"
+            = render "reel_slider"
+          / Featured
+          .featured-title
+            .ribbon
+              %span Featured content
+          =yield
+          / ENDS Featured
+        / ENDS Page wrap
+      / ENDS content wrap
+    / ENDS Wrapper
+    = render "footer"
