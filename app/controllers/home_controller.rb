@@ -1,45 +1,57 @@
 class HomeController < ApplicationController
-  
+before_filter :set_erail_key
+
+# Trains
+# Fares
+
+# Pnr status
+# rail_in.live_status(train_no, station_from, date)
+# rail_in.seat_availability(train_no, station_from, station_to, quota, class, date)
+# rail_in.train_at_station(station_from, station_to, hour)
+
   def pnr_status
     if params[:pnr_number]
-      @rail_in = RailIn.new(ERAILKEY)
       # 4404478884
       p @pnr_status = @rail_in.pnr_status(params[:pnr_number])
-      # @pnr_status = {"status"=>"OK", "result"=>{"pnr"=>"4404478884", "cls"=>"SL", "eticket"=>true, "journey"=>"25-Jan-2015", "trainno"=>"12661", "name"=>"POTHIGAI EXP", "from"=>"MS", "to"=>"TTL", "brdg"=>"MS", "passengers"=>[{"bookingstatus"=>"W/L 4CK", "currentstatus"=>"Confirmed", "coach"=>""}, {"bookingstatus"=>"W/L 5CK", "currentstatus"=>"Confirmed", "coach"=>""}], "chart"=>"CHART NOT PREPARED", "error"=>""}}
     end
   end
 
-  def station_lists
-    @station = Station.last
-    if @station.nil?
-      
-    end
-  @rail_in = RailIn.new(ERAILKEY)
-  @stations = @rail_in.stations
-  # @stations = {"status"=>"OK", "result"=>{"pnr"=>"4404478884", "cls"=>"SL", "eticket"=>true, "journey"=>"25-Jan-2015", "trainno"=>"12661", "name"=>"POTHIGAI EXP", "from"=>"MS", "to"=>"TTL", "brdg"=>"MS", "passengers"=>[{"bookingstatus"=>"W/L 4CK", "currentstatus"=>"Confirmed", "coach"=>""}, {"bookingstatus"=>"W/L 5CK", "currentstatus"=>"Confirmed", "coach"=>""}], "chart"=>"CHART NOT PREPARED", "error"=>""}}
+  def stations
+    @stations = Station.get_stations
   end
 
   def trains
-    @rail_in = RailIn.new(ERAILKEY)
-    @stations = @rail_in.stations
+    @stations = Station.get_stations
     if params[:search]
-      @rail_in = RailIn.new(ERAILKEY)
       @station_from = params[:search][:from]
       @station_to = params[:search][:to]
       @trains = @rail_in.trains(@station_from, @station_to)
-      # @trains = {"status"=>"OK", "result"=>[{"trainno"=>"12661", "name"=>"POTHIGAI EXP", "cls"=>"2A 3A SL", "rundays"=>"Daily", "from"=>"MS", "fromname"=>"Chennai Egmore", "dep"=>"20.55", "to"=>"TTL", "toname"=>"Tiruttangal", "arr"=>"06.34", "pantry"=>0, "type"=>"SUPERFAST", "datefrom"=>"25-Jan-2015", "dateto"=>"26-Jan-2020", "traveltime"=>"09.39"}]}
+    elsif params[:train]
+      @train_no = params[:train][:train_no]
+      @from = params[:train][:from]
+      @to = params[:train][:to]
+    elsif params[:passenger]
+      passengers = params[:passenger]
+      # age = params[:train_no]
+      date = params[:date]
+      p @fare = @rail_in.fare(params[:train_no], params[:from], params[:to], "24", "GN", date)
     end
   end
 
   def routes
     if params[:train_no]
-      @rail_in = RailIn.new(ERAILKEY)
-      @routes = @rail_in.route(params[:train_no])
+      @routes = @rail_in.full_route(params[:train_no])
     end
   end
 
   def ticket_fare
-    
+    @fare = @rail_in.fare(train_no, station_from, station_to, age, quota, date)
+  end
+
+  private
+
+  def set_erail_key
+    @rail_in = RailIn.new(ERAILKEY)
   end
 
 end

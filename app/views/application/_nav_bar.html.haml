@@ -3,22 +3,17 @@
   / Navigation
   %ul#nav.sf-menu
     %li.current-menu-item
-      %a{:href => "index.html"} Home
+      %a{:href => root_path} Home
     %li
-      %a{:href => "gallery.html"} Gallery
+      %a{:href => gallery_path} Gallery
     %li
-      %a{:href => "page.html"} Pages
-      %ul
-        %li
-          %a{:href => "page.html"} Sidebar page
-        %li
-          %a{:href => "page-fullwidth.html"} Fullwidth page
+      %a{:href => stations_path} Stations
     %li
-      %a{:href => "portfolio.html"} Portfolio posts
+      %a{:href => routes_path} Route
     %li
-      %a{:href => "blog.html"} Blog
+      %a{:href => trains_path} Trains
     %li
-      %a{:href => "contact.html"} Contact
+      %a{:href => contact_path} Contact
   / ENDS Navigation
   / Social
   %ul.social

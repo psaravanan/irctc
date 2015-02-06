@@ -9,5 +9,5 @@
     - @stations.each_with_index do |station, index|
       %tr
         %td= index + 1
-        %td= station["code"]
-        %td= station["name"]
+        %td= station.code
+        %td= station.name
