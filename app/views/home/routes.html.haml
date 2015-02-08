@@ -2,7 +2,7 @@
 %form
   .form-group
     %input#exampleInputEmail1.form-control{:placeholder => "Train number", name: :train_no, :type => "text", value: params[:train_no]}
-  %button.btn.btn-primary{:type => "submit"} Submit
+  %button{:type => "submit"} Submit
 
 - if @routes and @routes["status"]=="OK"
   %h3= @routes["result"]["name"]
@@ -20,3 +20,5 @@
             %td= stn["arr"]
             %td= stn["dep"]
             %td= stn["day"]
+- else
+  %h3= @routes["error_message"]

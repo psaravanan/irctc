@@ -1,0 +1,16 @@
+%h2 Trains
+%table.table.table-striped
+  %thead
+    %th #
+    %th Train number
+    %th Train Name
+    %th Start
+    %th End
+  %tbody
+    - @trains.each_with_index do |train, index|
+      %tr
+        %td= index + 1
+        %td= train.train_no
+        %td= train.name
+        %td= train.starts
+        %td= train.ends

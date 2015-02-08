@@ -1,0 +1,67 @@
+%h2 Trains
+- if params[:train]
+  = render "schedule_detail"
+- else
+  = render "search_train"
+- if @trains
+  %table.table.table-striped
+    %thead
+      %th #
+      %th Train Number
+      %th Train Name
+      %th From
+      %th Start Time
+      %th To
+      %th Arrival Time
+      %th Travel Time
+      %th Class
+    %tbody
+      - if @trains["status"]=="OK"
+        - @trains["result"].each_with_index do |train, index|
+          = form_for "train" do |f|
+            - train_no = train["trainno"]
+            %tr
+              %td= index + 1
+              %td
+                %input{type: :hidden, name: "train[date]", value: @date}
+                %input{type: :hidden, name: "train[train_no]", value: train["trainno"]}
+                %input{type: :hidden, name: "train[from]", value: train["from"]}
+                %input{type: :hidden, name: "train[to]", value: train["to"]}
+                = train["trainno"]
+              %td= train["name"]
+              %td= train["fromname"]
+              %td= train["dep"]
+              %td= train["toname"]
+              %td= train["arr"]
+              %td= train["traveltime"]
+              - if train["cls"]
+                %td
+                  - ticket_classes = train["cls"].split(" ")
+                  -ticket_classes.each do |c| 
+                    %button{name: :commit, type: :submit, value: c }= c
+      - else
+        %td{colspan: 5} Something went wrong
+
+- if params[:train]
+  = render "fare_details"
+  /
+    %h3 Passenger Details
+    %form
+      %input{type: :hidden, value: @train_no, name: :train_no}
+      %input{type: :hidden, value: @from, name: :from}
+      %input{type: :hidden, value: @to, name: :to}
+      %input{type: :hidden, value: @class_code, name: :class_code}
+      %input{type: :hidden, value: @date, name: :date}
+      - 6.times.each do |i|
+        %div
+          %label Name
+          %input{type: :text, name: "passenger[#{i}][name]"}
+          %label Sex
+          %select{name: "passenger[#{i}][sex]"}
+            %option{value: :male} Male
+            %option{value: :female} Female
+          %label Age
+          %input{type: :text, name: "passenger[#{i}][age]"}
+      %button{type: :submit} Submit
+
+

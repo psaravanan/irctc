@@ -1,0 +1,27 @@
+- if @fare["status"]=="OK"
+  %div
+    %p
+      %span Train number:
+      - @train_no = @fare["result"]["trainno"]
+      %span= @train_no
+      %span Train name
+      %span= Train.get_name(@train_no)
+      /
+        %span Date
+        %span= @fare["result"]["date"]
+    %p
+      %span From
+      %span= Station.get_name(@fare["result"]["from"])
+      %span To
+      %span= Station.get_name(@fare["result"]["to"])
+  %table
+    %theader
+      %th Class
+      %th Fare
+    %tbody
+      - @fare["result"]["fare"].each do |fare|
+        %tr
+          %td= fare["cls"]
+          %td= fare["fare"]
+- else
+  %p= @fare["status"]
