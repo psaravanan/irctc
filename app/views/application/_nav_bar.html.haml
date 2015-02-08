@@ -2,17 +2,17 @@
 #nav-bar-holder
   / Navigation
   %ul#nav.sf-menu
-    %li.current-menu-item
+    %li{class: "#{'current-menu-item' if action_name=='index' and controller_name=='home'}"}
       %a{:href => root_path} Home
-    %li
+    %li{class: "#{'current-menu-item' if action_name=='index' and controller_name=='trains'}"}
       %a{:href => trains_path} Trains
-    %li
+    %li{class: "#{'current-menu-item' if action_name=='stations'}"}
       %a{:href => stations_path} Stations
-    %li
+    %li{class: "#{'current-menu-item' if action_name=='routes'}"}
       %a{:href => routes_path} Route
-    %li
+    %li{class: "#{'current-menu-item' if action_name=='ticket_fare'}"}
       %a{:href => ticket_fare_path} Ticket Fare
-    %li
+    %li{class: "#{'current-menu-item' if action_name=='contact'}"}
       %a{:href => contact_path} Contact
   / ENDS Navigation
   / Social

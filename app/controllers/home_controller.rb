@@ -8,7 +8,9 @@ before_filter :set_erail_key
 # rail_in.live_status(train_no, station_from, date)
 # rail_in.seat_availability(train_no, station_from, station_to, quota, class, date)
 # rail_in.train_at_station(station_from, station_to, hour)
-
+  def contact
+  end
+  
   def pnr_status
     if params[:pnr_number]
       # 4404478884

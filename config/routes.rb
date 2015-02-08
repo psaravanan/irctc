@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :users
   resources :trains
-  post 'contact' => "home#contact"
+  get 'contact' => "home#contact"
   post 'ticket_fare' => "home#ticket_fare"
   get 'index' => "home#index"
   get 'pnr_status' => "home#pnr_status"
