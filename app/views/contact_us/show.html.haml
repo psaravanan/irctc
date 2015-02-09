@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @contact_u.name
+%p
+  %b Email:
+  = @contact_u.email
+%p
+  %b Message:
+  = @contact_u.message
+
+= link_to 'Edit', edit_contact_u_path(@contact_u)
+\|
+= link_to 'Back', contact_us_path
