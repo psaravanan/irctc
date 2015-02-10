@@ -4,9 +4,11 @@
     /%input#exampleInputEmail1.form-control{:placeholder => "To station", name: "search[to]", :type => "text", value: @station_to}
     - date = params[:search].present? ? params[:search][:date] : ""
     %label Date
-    %input{type: :text, name: "search[date]", class: "date datepicker", value: date}
+    %input{type: :text, name: "search[date]", id: "datepicker", value: date}
+    %label{for: "datepicker"}
+      %img{src: "/assets/calendar.png"}
     %label From
-    %select{name: "search[from]"}
+    %select{name: "search[from]", id: "empty-combo"}
       - @stations.each do |station|
         %option{value: station["code"], selected: station.code==@from}= "#{station.code}-#{station.name}"
     %label To

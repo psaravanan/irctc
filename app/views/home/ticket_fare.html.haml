@@ -18,7 +18,7 @@
     %tbody
       - if @trains["status"]=="OK"
         - @trains["result"].each_with_index do |train, index|
-          = form_for "train" do |f|
+          = form_for "train", method: :get do |f|
             - train_no = train["trainno"]
             %tr
               %td= index + 1

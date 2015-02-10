@@ -10,13 +10,14 @@ class Station < ActiveRecord::Base
 
   def self.get_stations
     if last.nil?
+      @rail_in = RailIn.new(ERAILKEY)
       stations = @rail_in.stations
       store_stations(stations)
     end
     all
   end
 
-  def store_stations(stations)
+  def self.store_stations(stations)
     transaction do
       stations.each do |station|
         Station.create!(station)

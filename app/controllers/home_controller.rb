@@ -25,14 +25,15 @@ before_filter :set_erail_key
       @date = params[:search][:date]
       @station_from = params[:search][:from]
       @station_to = params[:search][:to]
-      @trains = @rail_in.trains(@station_from, @station_to)
+      p @trains = @rail_in.trains(@station_from, @station_to)
     elsif params[:train]
       @date = params[:train][:date]
       @train_no = params[:train][:train_no]
       @class_code = params[:commit]
       @from = params[:train][:from]
       @to = params[:train][:to]
-      url = "http://api.erail.in/fare/?key=#{ERAILKEY}&trainno=#{@train_no}&stnfrom=#{@from}&stnto=#{@to}&age=AD&quota=GN&date=#{@date}&class=#{@class_code}"
+      p "ticket_fare"
+      p url = "http://api.erail.in/fare/?key=#{ERAILKEY}&trainno=#{@train_no}&stnfrom=#{@from}&stnto=#{@to}&age=AD&quota=GN&date=#{@date}&class=#{@class_code}"
       @fare = JSON.parse(RestClient.get(url))
     elsif params[:passenger]
       class_code = params[:class_code]
