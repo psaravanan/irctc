@@ -1,9 +1,15 @@
 %h2 Trains
-%table.table.table-striped
+%h2 Stations
+%input.search{"data-column" => "all", :type => "search"}
+  (Match any column)
+%input.search{"data-column" => "2", :type => "search"}
+  (Train name; Pothigai)
+%button.reset{:type => "button"} Reset Search
+%table.tablesorter
   %thead
     %th #
     %th Train number
-    %th Train Name
+    %th{"data-placeholder"=>"Train name"} Train Name
     %th Start
     %th End
   %tbody

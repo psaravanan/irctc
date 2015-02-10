@@ -1,9 +1,13 @@
 %h2 Stations
-- p @stations
-%table.table.table-striped
+%input.search{"data-column" => "all", :type => "search"}
+  (Match any column)
+%input.search{"data-column" => "1", :type => "search"}
+  (Station code; Tiruttangal search... try "TTL")
+%button.reset{:type => "button"} Reset Search
+%table.tablesorter
   %thead
     %th #
-    %th Code
+    %th{"data-placeholder"=>"Station code"} Code
     %th Name
   %tbody
     - @stations.each_with_index do |station, index|
