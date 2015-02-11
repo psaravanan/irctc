@@ -4,6 +4,7 @@ class ContactUsController < ApplicationController
   # GET /contact_us
   # GET /contact_us.json
   def index
+    @title = "Contact Us"
     @contact_u = ContactU.new
   end
 

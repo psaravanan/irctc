@@ -4,7 +4,6 @@
   %button.btn.btn-primary{:type => "submit"} Submit
 
 - if @rail_in
-  - p @pnr_status
   - if @pnr_status["status"]=="OK"
     %table.table
       %thead

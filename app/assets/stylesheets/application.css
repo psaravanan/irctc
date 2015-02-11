@@ -18,3 +18,13 @@
  #ui-datepicker-div{
  	z-index: 4000 !important;
  }
+.feature_img{
+	width: 290px;
+	height: 170px;
+}
+.body_container{
+	border: 1px solid rgb(153, 191, 230);
+	min-height: 710px;
+	border-top: 0px;
+	padding: 20px;
+}

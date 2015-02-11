@@ -9,6 +9,7 @@ before_filter :set_erail_key
 # rail_in.seat_availability(train_no, station_from, station_to, quota, class, date)
 # rail_in.train_at_station(station_from, station_to, hour)
   def pnr_status
+    @title = "PNR Status"
     if params[:pnr_number]
       # 4404478884
       p @pnr_status = @rail_in.pnr_status(params[:pnr_number])
@@ -16,10 +17,12 @@ before_filter :set_erail_key
   end
 
   def stations
+    @title = "Stations"
     @stations = Station.get_stations
   end
 
   def ticket_fare
+    @title = "Ticket Fare"
     @stations = Station.get_stations
     if params[:search]
       @date = params[:search][:date]
@@ -49,6 +52,7 @@ before_filter :set_erail_key
   end
 
   def routes
+    @title = "Route"
     if params[:train_no]
       @routes = @rail_in.route(params[:train_no])
     end

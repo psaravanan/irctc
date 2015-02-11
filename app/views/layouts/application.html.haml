@@ -43,8 +43,9 @@
           / Featured
           .featured-title
             .ribbon
-              %span Featured content
-          =yield
+              %span= @title.nil? ? "Featured content" : @title
+          .body_container
+            =yield
           / ENDS Featured
         / ENDS Page wrap
       / ENDS content wrap
