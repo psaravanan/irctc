@@ -1,5 +1,14 @@
 class Train < ActiveRecord::Base
 
+  def train_name
+    "#{train_no} - #{name}"
+  end
+
+  def self.train_name(code)
+    station = get_record(code)
+    "#{station.try(:train_name)}"
+  end
+
   def self.get_trains
     if last.nil?
       transaction do

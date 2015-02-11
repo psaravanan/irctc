@@ -15,51 +15,84 @@
 //= require turbolinks
 //= require_tree .
 $( document ).ready(function(){
-	
-	// $('select').searchable();
 
-	if($(".from_stations_inp, .to_stations_inp").length>0){
-		var stations;
-		$.ajax({
-			url: "/stations",
-			dataType: "json",
-			success: function(data) {
-				stations = data;
-			    function custom_source(request, response) {
-			        var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
-			        response($.grep(stations, function(value) {
-			            return matcher.test(value.name)
-			                || matcher.test(value.code);
-			        }));
-			    }
-				$(".from_stations_inp, .to_stations_inp").autocomplete({
-			      source: custom_source,
-				  select: function (event, ui) {
-				  	if($(this).hasClass("from_stations_inp")){
-					    $('.from_station').val(ui.item.code);
-					    $('.from_stations_inp').val(ui.item.label);
-					    $( ".from_station_code" ).val( ui.item? ui.item.label : 0 );
-				  	}else{
-				  		$('.to_station').val(ui.item.code);
-				  		$('.to_stations_inp').val(ui.item.label);
-				  		$( ".to_station_code" ).val( ui.item? ui.item.label : 0 );
-				  	}
-				    // $('.from_station_code').val(ui.item.value);
-				    return false;
-				  },
-				  change: function( event, ui ) {
-				  	if($(this).hasClass("from_stations_inp")){
-				  		$('.from_station').val(ui.item.code);
-				    	$( ".from_station_code" ).val( ui.item? ui.item.label : 0 );
-				    }else{
-				    	$('.to_station').val(ui.item.code);
-				    	$( ".to_station_code" ).val( ui.item? ui.item.label : 0 );
+	// autocomplete for Train in train fare page
+		if($(".train_inp").length>0){
+			var trains;
+			$.ajax({
+				url: "/trains",
+				dataType: "json",
+				success: function(data) {
+					trains = data;
+				    function custom_source(request, response) {
+				        var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+				        response($.grep(trains, function(value) {
+				            return matcher.test(value.name)
+				                || matcher.test(value.train_no);
+				        }));
 				    }
-				  } 
-			    });
-			}
-		});
-	}
+					$(".train_inp").autocomplete({
+				      source: custom_source,
+					  select: function (event, ui) {
+					    $('.train_number_inp').val(ui.item.train_no);
+					    $('.train_inp').val(ui.item.label);
+					    return false;
+					  },
+					  change: function( event, ui ) {
+				  		$('.train_number_inp').val(ui.item.train_no);
+				    	$( ".train_inp" ).val( ui.item? ui.item.label : 0 );
+					  } 
+				    });
+				}
+			});
+		}
+
+
+	
+	// autocomplete for station in train fare page
+		if($(".from_stations_inp, .to_stations_inp").length>0){
+			var stations;
+			$.ajax({
+				url: "/stations",
+				dataType: "json",
+				success: function(data) {
+					stations = data;
+				    function custom_source(request, response) {
+				        var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+				        response($.grep(stations, function(value) {
+				            return matcher.test(value.name)
+				                || matcher.test(value.code);
+				        }));
+				    }
+					$(".from_stations_inp, .to_stations_inp").autocomplete({
+				      source: custom_source,
+					  select: function (event, ui) {
+					  	if($(this).hasClass("from_stations_inp")){
+						    $('.from_station').val(ui.item.code);
+						    $('.from_stations_inp').val(ui.item.label);
+						    $( ".from_station_code" ).val( ui.item? ui.item.label : 0 );
+					  	}else{
+					  		$('.to_station').val(ui.item.code);
+					  		$('.to_stations_inp').val(ui.item.label);
+					  		$( ".to_station_code" ).val( ui.item? ui.item.label : 0 );
+					  	}
+					    // $('.from_station_code').val(ui.item.value);
+					    return false;
+					  },
+					  change: function( event, ui ) {
+					  	if($(this).hasClass("from_stations_inp")){
+					  		$('.from_station').val(ui.item.code);
+					    	$( ".from_station_code" ).val( ui.item? ui.item.label : 0 );
+					    }else{
+					    	$('.to_station').val(ui.item.code);
+					    	$( ".to_station_code" ).val( ui.item? ui.item.label : 0 );
+					    }
+					  } 
+				    });
+				}
+			});
+		}
+
 	// $("#empty-combo").sexyCombo({
 	// 	emptyText: "Choose a state..."
 	// });
