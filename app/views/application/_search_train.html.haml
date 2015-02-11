@@ -2,17 +2,18 @@
   .form-group
     /%input#exampleInputEmail1.form-control{:placeholder => "From station", name: "search[from]", :type => "text", value: @station_from}
     /%input#exampleInputEmail1.form-control{:placeholder => "To station", name: "search[to]", :type => "text", value: @station_to}
-    - date = params[:search].present? ? params[:search][:date] : ""
+    - if params[:search].present?
+      - date =  params[:search][:date]
+      - from = params[:search][:from]
+      - to = params[:search][:to]
     %label Date
     %input{type: :text, name: "search[date]", id: "datepicker", value: date}
     %label{for: "datepicker"}
       %img{src: "/assets/calendar.png"}
+    %input{name: "search[from]", type: :hidden, class: "from_station", value: from}
+    %input{name: "search[to]", type: :hidden, class: "to_station", value: to}
     %label From
-    %select{name: "search[from]", id: "empty-combo"}
-      - @stations.each do |station|
-        %option{value: station["code"], selected: station.code==@from}= "#{station.code}-#{station.name}"
+    %input{type: :text, class: "from_stations_inp", placeholder: "From Stations", value: Station.station_name(from)}
     %label To
-    %select{name: "search[to]"}
-      - @stations.each do |station|
-        %option{value: station["code"], selected: station.code==@to}= "#{station.code}-#{station.name}"
+    %input{type: :text, class: "to_stations_inp", placeholder: "To Stations", value: Station.station_name(to)}
   %button{:type => "submit"} Submit

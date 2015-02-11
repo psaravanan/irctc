@@ -12,18 +12,23 @@ before_filter :set_erail_key
     @title = "PNR Status"
     if params[:pnr_number]
       # 4404478884
-      p @pnr_status = @rail_in.pnr_status(params[:pnr_number])
+      @pnr_status = @rail_in.pnr_status(params[:pnr_number])
     end
   end
 
   def stations
     @title = "Stations"
     @stations = Station.get_stations
+    respond_to do |format|
+      format.html { render :stations }
+      # format.json { render :show, status: :created, location: @contact_u }
+      format.json { render json: @stations.map {|s| { label: s.station_name, value: s.station_name, code: s.code, name: s.name }} }
+    end
   end
 
   def ticket_fare
     @title = "Ticket Fare"
-    @stations = Station.get_stations
+    @stations = Station.get_stations.limit(100)
     if params[:search]
       @date = params[:search][:date]
       @station_from = params[:search][:from]

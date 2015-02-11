@@ -22,6 +22,6 @@
       - @fare["result"]["fare"].each do |fare|
         %tr
           %td= fare["cls"]
-          %td= number_to_currency(fare["fare"])
+          %td= number_to_currency(fare["fare"], unit: "र")
 - else
   %p= @fare["status"]

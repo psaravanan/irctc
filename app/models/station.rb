@@ -1,5 +1,14 @@
 class Station < ActiveRecord::Base
 
+  def station_name
+    "#{code} - #{name}"
+  end
+
+  def self.station_name(code)
+    station = get_record(code)
+    "#{station.try(:station_name)}"
+  end
+
   def self.get_name(code)
     get_record(code).try(:name)
   end
