@@ -3,7 +3,6 @@
     %input{type: :hidden, class: "train_number_inp", name: :train_no, value: params[:train_no]}
     %input.train_inp{:placeholder => "Train number", :type => "text", value: Train.get_name(params[:train_no])}
   %button{:type => "submit"} Submit
-
 - if @routes
   - if @routes["status"]=="OK"
     %h3= @routes["result"]["name"]
