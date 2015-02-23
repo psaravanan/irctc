@@ -1,27 +1,29 @@
 - if @fare["status"]=="OK"
-  %div
-    %p
-      %span Train number:
-      - @train_no = @fare["result"]["trainno"]
-      %span= @train_no
-      %span Train name
-      %span= Train.get_name(@train_no)
-      /
-        %span Date
-        %span= @fare["result"]["date"]
-    %p
-      %span From
-      %span= Station.get_name(@fare["result"]["from"])
-      %span To
-      %span= Station.get_name(@fare["result"]["to"])
-  %table
-    %theader
-      %th Class
-      %th Fare
+  %table.tablesorter2
+    %thead
+      %th Date
+      %th Train no
+      %th Train name
+      %th From
+      %th To
     %tbody
-      - @fare["result"]["fare"].each do |fare|
-        %tr
-          %td= fare["cls"]
-          %td= number_to_currency(fare["fare"], unit: "र")
+      %tr
+        %td= @date
+        %td= @train_no
+        %td= Train.get_name(@train_no)
+        %td= Station.get_name(@fare["result"]["from"])
+        %td= Station.get_name(@fare["result"]["to"])
+
+
+  .fare_div
+    %table{style: "width: 190px;margin: 0 auto;"}
+      %thead{style: "background: red;color: white;"}
+        %th{style: "width: 100px"} Class
+        %th{style: "width: 100px"} Fare
+      %tbody
+        - @fare["result"]["fare"].each do |fare|
+          %tr{style: "font-weight: bold;border: 1px solid red;"}
+            %td{style: "width: 100px;text-align: center;"}= fare["cls"]
+            %td{style: "width: 100px;text-align: center;"}= number_to_currency(fare["fare"], unit: "र")
 - else
   %p= @fare["status"]

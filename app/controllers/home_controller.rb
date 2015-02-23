@@ -1,17 +1,11 @@
 class HomeController < ApplicationController
 before_filter :set_erail_key
 
-# Trains
-# Fares
-
-# Pnr status
-# rail_in.live_status(train_no, station_from, date)
-# rail_in.seat_availability(train_no, station_from, station_to, quota, class, date)
-# rail_in.train_at_station(station_from, station_to, hour)
   def pnr_status
     @title = "PNR Status"
     if params[:pnr_number]
       # 4404478884
+      # 4104458537
       @pnr_status = @rail_in.pnr_status(params[:pnr_number])
     end
   end

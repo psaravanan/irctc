@@ -1,9 +1,9 @@
 - if params[:train]
-  = render "schedule_detail"
+  /= render "schedule_detail"
 - else
   = render "search_train"
 - if @trains
-  %table.table.table-striped
+  %table.tablesorter
     %thead
       %th #
       %th Train Number

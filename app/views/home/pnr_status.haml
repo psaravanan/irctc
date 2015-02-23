@@ -1,9 +1,9 @@
 %form
   .form-group
     %input#exampleInputEmail1.form-control{:placeholder => "PNR Number", name: :pnr_number, :type => "text", value: params[:pnr_number]}
-  %button.btn.btn-primary{:type => "submit"} Submit
+  %button{:type => "submit"} Submit
 
-- if @rail_in
+- if @rail_in and @pnr_status
   - if @pnr_status["status"]=="OK"
     %table.table
       %thead
@@ -37,4 +37,8 @@
           %td{colspan: 3} Charting Status
           %td{colspan: 4}= @pnr_status["result"]["chart"]
   - else
-    %p= @pnr_status["error_message"]
+    %p
+      - if @pnr_status["error_message"]
+        = @pnr_status["error_message"]
+      - else
+        = @pnr_status["status"]
